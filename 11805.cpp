@@ -28,4 +28,7 @@ int main()
         printf("Case %d: %d\n", i+1, results.at(i));
     }
 
+
+    return 0;
+
 }
