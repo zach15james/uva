@@ -1,31 +1,39 @@
 #!/bin/bash
-# run.sh — compile and run UVA-style C++ files
-# Usage: ./run.sh 1154
+# Usage: ./r.sh 1154
 
-# Get the problem number (first argument)
+
+# NOTE: 
+# have inputi.txt
+# have i.cpp
+# run: ./r.sh i
+
+# makes workflow super fast
+
+
+# get the prob number
 PROB_NUM="$1"
 
-# Toggle this if you want to automatically redirect from input.txt
-USE_INPUT=true
+# get input file name
+INPUT_FILE="input${PROB_NUM}.txt"
 
-# Check that a number was provided
 if [ -z "$PROB_NUM" ]; then
   #echo "Usage: $0 <problem_number>"
   exit 1
 fi
 
-# Compile the C++ file with optimization and C++17 standard
-g++ -Wall -O2 -std=c++17 "${PROB_NUM}.cpp" -o "$PROB_NUM"
+# Compile the C++ file
+g++ -lm -lcrypt -O2 -pipe -DONLINE_JUDGE "${PROB_NUM}.cpp" -o "$PROB_NUM"
 if [ $? -ne 0 ]; then
   echo "Compilation failed."
   exit 1
 fi
 
 # Run the compiled program
-if [ "$USE_INPUT" = true ] && [ -f input.txt ]; then
-  #echo "Running $PROB_NUM with input redirected from input.txt..."
-  "./$PROB_NUM" < input.txt
+# Automatically check if the corresponding input file exists
+if [ -f "$INPUT_FILE" ]; then
+  #echo "Running $PROB_NUM with input redirected from $INPUT_FILE..."
+  "./$PROB_NUM" < "$INPUT_FILE"
 else
-  #echo "Running $PROB_NUM without input redirection..."
+  #echo "Running $PROB_NUM without input redirection ($INPUT_FILE not found)..."
   "./$PROB_NUM"
 fi

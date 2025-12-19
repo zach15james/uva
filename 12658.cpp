@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 int main()
 {
 
@@ -39,7 +38,6 @@ int main()
     }
 
     if(length > 0) { numbers[number_idx].second = length; } // flush last run
-
 
 
     // eat the next 2 lines (redundant)
