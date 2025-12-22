@@ -14,7 +14,10 @@
 PROB_NUM="$1"
 
 # get input file name
-INPUT_FILE="input${PROB_NUM}.txt"
+#INPUT_FILE="input${PROB_NUM}.txt"
+INPUT_FILE="input.txt"
+
+# check if the problem number is provided
 
 if [ -z "$PROB_NUM" ]; then
   #echo "Usage: $0 <problem_number>"
