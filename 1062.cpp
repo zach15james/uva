@@ -5,50 +5,44 @@ int main()
 {
   vector<int> results;  
   char line[1002];
+  //int l = 1;
   while(fgets(line, 1002, stdin))
   {
-    vector<pair<stack<char>, bool>> stacks;  // stacks[i].first = stack<char>; stacks[i].second = bool ( last-one-differrent, all initialized to false, as 0 elment is intiialized) 
-    int s = 0; bool
-    stacks[0].push_back(line[0]);  // original case to not have to deal with empty start special case 
-    for(int i = 1; i < 1000; i++)
+    //printf("start of line %d\n", l); l++;
+
+    line[strcspn(line,"\r\n")] = 0; // strip newline
+    if(strcmp(line, "end") == 0) { break; } // end of input 
+    // stacks[i].first = stack<char>; stacks[i].second = bool ( last-one-differrent, all initialized to false, as 0 elment is intiialized) 
+    //vector<pair<stack<char>, bool>> stacks(line_length); // to be safe (could be optimized, but perfect is the enemy of good  
+    //stack<char> st;
+    vector<stack<char>> stacks;
+    
+    int line_length = strlen(line);
+    int s = 0;  char c;
+    if(line_length > 0) { stacks.emplace_back(); stacks[0].push(line[0]); } 
+    
+    //printf("[{%c}", c);
+    // iterate through the line  
+    for(int i = 1; i < line_length; i++)
     {
-      char c = line[i]; char p;
-      if(c <= 'A' || c >= 'Z') break; // exit loop, as input is through
-      else
+      c = line[i]; //printf("{%c}", c);
+
+      bool placed = false;
+
+      for(int j = 0; j < stacks.size(); j++)
       {
-        // NO PREV DIFF
-        if(stacks[s].second == false)
-        {
-          if(stacks[s].first.top() != c) { stacks[s].second = true; }
-          stacks[s].first.push(c); 
+        if(c <= stacks[j].top())
+        { 
+          stacks[j].push(c);  // unecessary if == (need to uncomment IF check becomes <=)
+          placed = true; break; 
         }
-        else // was previous difference
-        {
-          // no current difference
-          if(stacks[s].first.top() == c) { stacks[s].first.push(c); stacks[s].second = false; }
-          else // is a difference
-          { 
-            // check other previous indexes, add there if possible, else pop the previous element, add it to a new stack (iterate s), then add current element on top of that element
-            p = stacks[s].first.top();
-            stacks[s].first.pop(); 
-            stacks[s].second = false; // fixing this 
-            stacks[++s].push(p);
-            stacks[++s].push(c); 
-            stacks[s].second = true; 
-          }
-        }
-
-
-
-
-
-
-
-        
       }
+
+      if(!placed) { stack<char> z; z.push(c); stacks.push_back(z); }
     }
 
-    results.push_back(stacks.size());
+
+    results.push_back(stacks.size()); // stacks needed ( or I guess I could do stacks.size()
   }
 
   for(int r = 0; r < results.size(); r++)
@@ -56,3 +50,5 @@ int main()
 
   return 0;
 }
+
+

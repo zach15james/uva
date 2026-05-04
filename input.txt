@@ -1,5 +1,13 @@
-A
-CBACBACBACBACBA
-CCCCBBBBAAAA
-ACMICPC
-end
+(*a++(*)
+(*a{+}*)
+    <************)>
+    ()(***)(**)
+   ()(***)(*)
+({{}{}}[{(){}[]}
+   ([))
+ ()(**)
+    ()*
+ aaaaaaa
+    aaa(aaaa
+ *******
+
